@@ -1,7 +1,7 @@
 {
     "name": "Invoice Reports",
     "summary": "Invoice Reports",
-    "version": "16.0.0.2",
+    "version": "16.0.0.3",
     "maintainers": ["WAO"],
     "category": "Accounting",
     "website": "http://www.waoconnect.com",

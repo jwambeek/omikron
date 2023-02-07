@@ -186,7 +186,7 @@
                         <strong>Please make payment to:</strong><br/>
                         <span>Bank : Commonwealth bank</span><br/>
                         <span>Name : Omikron Auto Detailing Products PTY LTD<br/></span>
-                        <span>BSB : 060 340<br/></span>
+                        <span>BSB : 062 340<br/></span>
                         Acc # : 1077 5442<br/>
                         Ref # : <span t-esc="o.name"/><br/>
                     </div>
