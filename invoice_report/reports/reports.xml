@@ -2,11 +2,25 @@
 <odoo>
     <data>
         <record id="account_invoices_new" model="ir.actions.report">
-            <field name="name">Tax Invoice New</field>
+            <field name="name">Tax Invoice</field>
             <field name="model">account.move</field>
             <field name="report_type">qweb-pdf</field>
             <field name="report_name">invoice_report.report_invoice_with_payments_new</field>
             <field name="report_file">invoice_report.report_invoice_with_payments_new</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice')),
+ (4, ref('account.group_account_readonly'))]"/>
+        </record>
+
+        <record id="account_invoices_rrp" model="ir.actions.report">
+            <field name="name">Tax Invoice with RRP</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">invoice_report.report_invoice_with_payments_rrp</field>
+            <field name="report_file">invoice_report.report_invoice_with_payments_rrp</field>
             <field name="print_report_name">(object._get_report_base_filename())</field>
             <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>
             <field name="binding_model_id" ref="account.model_account_move"/>
