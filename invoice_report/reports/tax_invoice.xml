@@ -4,7 +4,7 @@
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context(lang=lang)" />
                 <t t-set="forced_vat" t-value="o.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
-                <h2 style="font-size:30px;margin-top:50px;margin-bottom:40px;">
+                <h2 style="font-size:30px;margin-bottom:40px;">
                     <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Tax Invoice</span>
                     <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Tax Invoice</span>
                     <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-auto col-3 mw-100 mb-2" name="customer_code">
                                 <strong>Customer Order #</strong>
-                                <p class="m-0" t-field="o.partner_id.ref"/>
+                                <p class="m-0" t-field="o.ref"/>
                             </div>
                             <div class="col-auto col-3 mw-100 mb-2">
                                 <strong>Terms:</strong>
@@ -65,7 +65,6 @@
                         <table class="table table-sm o_main_table" name="invoice_line_table">
                             <thead>
                                 <tr>
-                                    <th name="th_description" class="text-start"><span>Code</span></th>
                                     <th name="th_description" class="text-start"><span>Description</span></th>
                                     <th name="th_quantity" class="text-center"><span>Quantity</span></th>
                                     <th class="text-center"><span>UOM</span></th>
@@ -90,11 +89,10 @@
 
                                     <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
                                         <t t-if="line.display_type == 'product'" name="account_invoice_line_accountable">
-                                            <td name="account_invoice_line_name"><span t-esc="line.product_id.default_code"/></td>
-                                            <td name="account_invoice_line_name"><span t-esc="line.product_id.name"/></td>
+                                            <td name="account_invoice_line_name"><span t-field="line.name"/></td>
                                             <td class="text-center">
                                                 <span t-field="line.quantity"/>
-<!--                                                <span t-field="line.product_uom_id"  groups="uom.group_uom"/>-->
+                                                <!--                                                <span t-field="line.product_uom_id"  groups="uom.group_uom"/>-->
                                             </td>
                                             <td class="text-center">
                                                 <span t-field="line.product_uom_id"/>
@@ -180,16 +178,18 @@
                             </div>
                         </div>
                     </div>
-                    <span style="font-size:17px;">
+                    <div style="font-size:17px;;page-break-inside: avoid;">
                         <strong>Special Instructions</strong><br/>
-                        <span>Instructions</span><br/><br/>
+                        <span t-field="o.narration"/><br/><br/>
+                    </div>
+                    <div style="font-size:17px;;page-break-inside: avoid;">
                         <strong>Please make payment to:</strong><br/>
                         <span>Bank : Commonwealth bank</span><br/>
                         <span>Name : Omikron Auto Detailing Products PTY LTD<br/></span>
                         <span>BSB : 060 340<br/></span>
                         Acc # : 1077 5442<br/>
                         Ref # : <span t-esc="o.name"/><br/>
-                    </span>
+                    </div>
                     <!--                    <p t-if="o.move_type in ('out_invoice', 'in_refund') and o.payment_reference" name="payment_communication" class="mt-4">-->
                     <!--                        Please use the following communication for your payment : <b><span t-field="o.payment_reference"/></b>-->
                     <!--                    </p>-->
@@ -223,9 +223,9 @@
                             </div>
                         </div>
                     </t>
-                    <div t-if="not is_html_empty(o.narration)" name="comment">
-                        <span t-field="o.narration"/>
-                    </div>
+                    <!--                    <div t-if="not is_html_empty(o.narration)" name="comment">-->
+                    <!--                        <span t-field="o.narration"/>-->
+                    <!--                    </div>-->
                     <div t-if="not is_html_empty(o.fiscal_position_id.note)" name="note">
                         <span t-field="o.fiscal_position_id.note"/>
                     </div>
