@@ -1,7 +1,7 @@
 {
     "name": "Invoice Reports",
     "summary": "Invoice Reports",
-    "version": "16.0.0.3",
+    "version": "16.0.0.4",
     "maintainers": ["WAO"],
     "category": "Accounting",
     "website": "http://www.waoconnect.com",
@@ -10,6 +10,7 @@
     "data": [
         "reports/tax_invoice_rrp.xml",
         "reports/tax_invoice.xml",
+        "reports/preview_invoice.xml",
         "reports/reports.xml",
     ],
     "application": False,
